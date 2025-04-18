@@ -1,19 +1,10 @@
 import React from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Dimensions,
-  Platform,
-} from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NaverMapView, Region, Coord, Camera } from '@mj-studio/react-native-naver-map';
-import { FONTS } from '@/constants/fonts';
+import { createSearchStyles } from '@/styles/search.styles';
 
-const { width, height } = Dimensions.get('window');
-
-// 서울 중심 좌표 (초기 지도 위치)
 const SeoulRegion: Region = {
   latitude: 37.5665,
   longitude: 126.978,
@@ -24,20 +15,12 @@ const SeoulRegion: Region = {
 export default function SearchScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+  const styles = createSearchStyles(insets); // ✅ 스타일 불러오기
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          paddingTop: Platform.OS === 'ios' ? insets.top : 0,
-          paddingBottom: Platform.OS === 'ios' ? insets.bottom : 0,
-        },
-      ]}
-    >
-      {/* 네이버 지도 전체 배경 */}
+    <View style={styles.container}>
       <NaverMapView
-        style={styles.map}
+        style={StyleSheet.absoluteFillObject}
         initialRegion={SeoulRegion}
         isShowCompass
         isShowScaleBar
@@ -55,7 +38,6 @@ export default function SearchScreen() {
         }
       />
 
-      {/* 지도 위에 떠 있는 반투명 검색창 */}
       <View style={styles.searchOverlay}>
         <TextInput
           placeholder={t('search.placeholder')}
@@ -66,29 +48,3 @@ export default function SearchScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#121212',
-  },
-  map: {
-    flex: 1,
-  },
-  searchOverlay: {
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 70 : 50,
-    left: 20,
-    right: 20,
-    zIndex: 10,
-  },
-  searchInput: {
-    backgroundColor: '#1f1f1fee', // 반투명
-    color: '#fff',
-    fontSize: 16,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    fontFamily: FONTS.PretendardMedium,
-  },
-});

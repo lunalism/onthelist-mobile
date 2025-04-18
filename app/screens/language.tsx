@@ -9,9 +9,11 @@ export default function LanguageScreen() {
   const setLanguage = useLanguageStore((state) => state.setLanguage);
   const navigation = useNavigation();
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
 
   const selectLanguage = (lang: 'ko' | 'en') => {
     setLanguage(lang);
+    i18n.changeLanguage(lang);
     navigation.navigate('Search' as never); // 또는 replace로 이동 불가하게 할 수도 있음
   };
 
