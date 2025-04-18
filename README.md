@@ -61,7 +61,7 @@ npx expo install expo-asset
 npx expo install expo-font
 npm install --save-dev babel-plugin-module-resolver
 npm install i18next react-i18next i18next-browser-languagedetector
-
+npm install @mj-studio/react-native-naver-map
 
 
 ---

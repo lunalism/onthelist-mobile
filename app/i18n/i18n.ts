@@ -14,6 +14,7 @@ export const resources = {
 i18n
   .use(initReactI18next)
   .init({
+    compatibilityJSON: 'v3', // ✅ 중요
     resources,               // 사용할 다국어 리소스
     lng: 'ko',               // 기본 언어
     fallbackLng: 'en',       // 언어 fallback

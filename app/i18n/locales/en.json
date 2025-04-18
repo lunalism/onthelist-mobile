@@ -3,6 +3,9 @@
       "title": "Please select your language",
       "korean": "🇰🇷 Korean",
       "english": "🇺🇸 English"
+    },
+    "search": {
+      "placeholder": "What are you looking for?"
     }
   }
   
